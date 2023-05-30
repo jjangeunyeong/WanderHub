@@ -1,3 +1,3 @@
-# New_Project
+# WanderHub
 
-인프런에서 만난 인연
+여행 커뮤니티 WanderHub!
