@@ -1,8 +1,7 @@
-import Footer from "../../Organism/Common/Footer";
-import Header from "../../Organism/Common/Header";
-// interface PropsType {
-//   // 프롭스로내려오는 타입은 각컴포넌트에서 하는걸로
-// }
+import Footer from '@components/Organism/Common/Footer';
+import Header from '@components/Organism/Common/Header';
+import React from 'react';
+
 const MainPage = () => {
   return (
     <>
