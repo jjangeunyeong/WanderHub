@@ -1,20 +1,21 @@
-import { useLocation } from "react-router-dom";
-import LinkButton from "../../Atoms/LinkButton";
-import Button from "../../Atoms/Button";
-import MainLogo from "../../Molecules/MainLogo";
+import { useLocation } from 'react-router-dom';
+import LinkButton from '@components/Atoms/LinkButton';
+import Button from '@components/Atoms/Button';
+import MainLogo from '@components/Molecules/MainLogo';
+import React from 'react';
 
 const LinkList = [
   {
-    title: "동행",
-    path: "/accompany",
+    title: '동행',
+    path: '/accompany',
   },
   {
-    title: "여행지",
-    path: "/travel", // 예비로 넣어놓음
+    title: '여행지',
+    path: '/travel', // 예비로 넣어놓음
   },
   {
-    title: "커뮤니티",
-    path: "/comunity", // 예비로 넣어놓음
+    title: '커뮤니티',
+    path: '/comunity', // 예비로 넣어놓음
   },
 ];
 
@@ -27,15 +28,15 @@ const Header = () => {
           <MainLogo />
         </div>
         <ul className="mr-auto ml-5 flex space-x-4">
-          {LinkList.map((link) => {
+          {LinkList.map(link => {
             return (
               <li key={link.path}>
                 <LinkButton
                   path={link.path}
                   classNameProps={
                     location.pathname.includes(link.path)
-                      ? "text-white hover:text-white border-b border-white"
-                      : "text-gray-300 hover:text-white"
+                      ? 'text-white hover:text-white border-b border-white'
+                      : 'text-gray-300 hover:text-white'
                   }
                 >
                   {link.title}
@@ -46,7 +47,7 @@ const Header = () => {
         </ul>
         <div>
           <Button
-            clickEvent={() => console.log("click")}
+            clickEvent={() => console.log('click')}
             classNameProps="text-gray-300 hover:text-white border border-gray-300 rounded-full px-4 py-2"
           >
             내정보
