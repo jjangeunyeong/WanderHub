@@ -7,4 +7,11 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  resolve: {
+    alias: [
+      { find: '@assets', replacement: '/src/assets' },
+      { find: '@components', replacement: '/src/components' },
+      { find: '@', replacement: '/src' },
+    ],
+  },
 });

@@ -12,7 +12,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-// feat/동행
-
-// feat : 뭐만듬 (한글)
