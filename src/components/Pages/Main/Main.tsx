@@ -5,6 +5,7 @@ import React from 'react';
 const MainPage = () => {
   return (
     <>
+      test
       <Header />
       <Footer />
     </>
