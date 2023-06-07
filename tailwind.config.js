@@ -4,7 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        maincolor: '#6c9976',
+        primary: '#6c9976',
+      },
+      width: {
+        90: '90%',
       },
     },
   },
