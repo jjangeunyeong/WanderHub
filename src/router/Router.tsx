@@ -1,15 +1,35 @@
-import { Route, Routes } from 'react-router-dom';
-import MainPage from '@components/Pages/Main/Main';
-import Accompany from '@components/Pages/Accompany/Accompany';
 import React from 'react';
-import AccompanyPost from '@components/Pages/Accompany/AccompanyPost';
+import { Route, Routes } from 'react-router-dom';
+import Home from '@/pages/Home/Home';
+import Accompany from '@/pages/Accompany/Accompany';
+import AccompanyPost from '@/pages/Accompany/AccompanyPost';
+import AccompanyDetail from '@/pages/Accompany/AccompanyDetail';
+import Comunity from '@/Pages/Community/Community';
+import Writing from '@/Pages/Community/Writing/Writing';
+import NotFound from '@/pages/NotFound.tsx/NotFound';
+import MyPage from '@pages/MyPage/MyPage';
+import Redirection from '@/Pages/Login/Redirection';
+import LoginTest from '@/Pages/Login/LoginTest';
+import Travel from '@pages/Travel/Travel';
+import TravelDetail from '@pages/Travel/TravelDetail';
+import CommunityDetail from '@/Pages/Community/Detail/CommunityDetail';
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<LoginTest />} />
       <Route path="/accompany" element={<Accompany />} />
       <Route path="/accompany/post" element={<AccompanyPost />} />
+      <Route path="/accompany/:accompanyId" element={<AccompanyDetail />} />
+      <Route path="/mypage" element={<MyPage />} />
+      <Route path="/community" element={<Comunity />} />
+      <Route path="/community/writing" element={<Writing />} />
+      <Route path="/community/detail" element={<CommunityDetail />} />
+      <Route path="/oauth/redirect" element={<Redirection />} />
+      <Route path="/travel" element={<Travel />} />
+      <Route path="/travel/:contentId" element={<TravelDetail />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

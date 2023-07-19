@@ -5,6 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": false,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -24,7 +25,9 @@
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@/*": ["src/*"]
+      "@pages/*": ["src/pages/*"],
+      "@/*": ["src/*"],
+      "react-kakao-maps-sdk": ["node_modules/react-kakao-maps-sdk/lib/@types/index.d.ts"]
     }
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],
