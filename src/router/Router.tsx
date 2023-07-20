@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from '@/pages/Home/Home';
-import Accompany from '@/pages/Accompany/Accompany';
-import AccompanyPost from '@/pages/Accompany/AccompanyPost';
-import AccompanyDetail from '@/pages/Accompany/AccompanyDetail';
-import Comunity from '@/Pages/Community/Community';
-import Writing from '@/Pages/Community/Writing/Writing';
-import NotFound from '@/pages/NotFound.tsx/NotFound';
+import Home from '@pages/Home/Home';
+import Accompany from '@pages/Accompany/Accompany';
+import AccompanyPost from '@pages/Accompany/AccompanyPost';
+import AccompanyDetail from '@pages/Accompany/AccompanyDetail';
+import Comunity from '@pages/Community/Community';
+import Writing from '@pages/Community/Writing/Writing';
+import NotFound from '@pages/NotFound.tsx/NotFound';
 import MyPage from '@pages/MyPage/MyPage';
-import Redirection from '@/Pages/Login/Redirection';
-import LoginTest from '@/Pages/Login/LoginTest';
+import Redirection from '@pages/Login/Redirection';
+import LoginTest from '@pages/Login/LoginTest';
 import Travel from '@pages/Travel/Travel';
 import TravelDetail from '@pages/Travel/TravelDetail';
-import CommunityDetail from '@/Pages/Community/Detail/CommunityDetail';
+import CommunityDetail from '@pages/Community/Detail/CommunityDetail';
 
 const Router = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { accompanyList } from '@/constant/DummyData';
-import KaKaoMap from '@components/common/KaKaoMap';
+import KaKaoMap from '@components/Common/KaKaoMap';
 import Detail from './Detail';
 import { useParams } from 'react-router-dom';
 

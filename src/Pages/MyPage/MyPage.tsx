@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
-import Footer from '@components/common/Footer';
-import Header from '@components/common/Header';
+import Footer from '@components/Common/Footer';
+import Header from '@components/Common/Header';
 import SideBar, { myPageTabType } from '@components/mypage/SideBar';
 import ControlBox from '@components/mypage/ControlBox';
 import Modal from '@pages/Login/Modal';

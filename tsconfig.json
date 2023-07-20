@@ -25,7 +25,7 @@
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
+      "@pages/*": ["src/Pages/*"],
       "@/*": ["src/*"],
       "react-kakao-maps-sdk": ["node_modules/react-kakao-maps-sdk/lib/@types/index.d.ts"]
     }

@@ -1,5 +1,5 @@
 import { TravelDetailType } from '@/types/travelDataType';
-import KaKaoMap from '@components/common/KaKaoMap';
+import KaKaoMap from '@components/Common/KaKaoMap';
 import React from 'react';
 
 interface ContentLeftBoxTypes {

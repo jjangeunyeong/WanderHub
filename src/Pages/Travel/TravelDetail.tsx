@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Footer from '@components/common/Footer';
-import Header from '@components/common/Header';
-import Container from '@components/common/Container';
-import Modal from '@/pages/Login/Modal';
+import Footer from '@components/Common/Footer';
+import Header from '@components/Common/Header';
+import Container from '@components/Common/Container';
+import Modal from '@pages/Login/Modal';
 import useGetTravelDetail from '@/hooks/queryHooks/useGetTravelDetail';
 import { useParams } from 'react-router-dom';
-import Spinner from '@components/common/Spinner';
+import Spinner from '@components/Common/Spinner';
 import ContentLeftBox from '@components/travel/detail/ContentLeftBox';
 import ContentRightBox from '@components/travel/detail/ContentRightBox';
 
