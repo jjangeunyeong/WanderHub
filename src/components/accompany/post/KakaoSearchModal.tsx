@@ -3,7 +3,7 @@ import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai';
 
 import useKakaoLocalSearch from '@/hooks/queryHooks/useKakaoLocalSearch';
 import { KakaoLocalListType } from '@/types/kakaoType';
-import Spinner from '@components/Common/Spinner';
+import Spinner from '@components/common/Spinner';
 
 interface KakaoSearchModalProps {
   handleModal: () => void;

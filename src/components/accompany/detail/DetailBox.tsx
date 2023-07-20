@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import KakaoMap from '@components/Common/KakaoMap';
+import KakaoMap from '@components/common/KakaoMap';
 import { useParams } from 'react-router-dom';
 import DetailInfo from './DetailInfo';
 

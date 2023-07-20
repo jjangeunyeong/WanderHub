@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactCalendar from '@components/Common/ReactCalendar';
+import ReactCalendar from '@components/common/ReactCalendar';
 import PostForm from '@components/accompany/post/PostForm';
 
 export interface FormDataType {

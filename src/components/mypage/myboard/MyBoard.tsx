@@ -1,4 +1,4 @@
-import Pagenation from '@components/Common/Pagenation';
+import Pagenation from '@components/common/Pagenation';
 import React, { useState } from 'react';
 import TableItem from './TableItem';
 
