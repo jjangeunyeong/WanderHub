@@ -38,6 +38,7 @@ const MyInfo = () => {
 
   const handleImageChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     console.log(e);
+    console.log(selectedImage);
     const file = e.target.files?.[0];
     if (file) {
       setSelectedImage(file);

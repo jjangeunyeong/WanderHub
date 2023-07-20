@@ -8,6 +8,11 @@ const myBoardTapList: { tabTxt: string; tabName: string }[] = [
 ];
 const MyBoard = () => {
   const [curMenu, setMenu] = useState('myAccompany');
+  const [curPage, setCurPage] = useState<number>(1);
+  const handlePageNation = (page: number) => {
+    setCurPage(page);
+  };
+
   return (
     <>
       <div className="mt-[1rem] border-2 shadow-md inset h-16 w-[80%] rounded-full flex items-center justify-between px-4">
@@ -76,7 +81,7 @@ const MyBoard = () => {
                   })}
               </tbody>
             </table>
-            <Pagenation />
+            <Pagenation totalPages={20} curPage={curPage} handlePageNation={handlePageNation} />
           </div>
         </div>
       </div>

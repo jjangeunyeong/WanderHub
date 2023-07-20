@@ -1,21 +1,23 @@
 import React from 'react';
-import { AccompanyDataType } from '@/types/accompanyType';
+import { AccompanyDetailDataType } from '@/types/accompanyType';
 import { FcCalendar, FcLinux, FcConferenceCall } from 'react-icons/fc';
 import { IoLocation } from 'react-icons/io5';
 
-const Detail = (props: AccompanyDataType) => {
-  const { writerName, accompanyLocal, accompanyDate, maxNum, accompanyTitle, accompanyContent } =
+const DetailInfo = (props: AccompanyDetailDataType) => {
+  const { nickname, accompanyLocal, accompanyDate, maxNum, accompanyTitle, accompanyContent } =
     props;
+  console.log(props);
+
   return (
     <>
-      <div className="flex items-center font-serif font-bold ">제목 :</div>
-      <div className="mb-[.5rem]">{accompanyTitle}</div>
-      <div className="flex items-center font-serif font-bold ">내용 :</div>
-      <div className="mb-[.5rem]">{accompanyContent}</div>
+      <div className="flex items-center font-serif font-bold ">제목 : {accompanyTitle}</div>
+      {/* <div className="mb-[.5rem]">{accompanyTitle}</div> */}
+      <div className="flex items-center font-serif font-bold ">내용 : {accompanyContent}</div>
+      {/* <div className="mb-[.5rem]">{accompanyContent}</div> */}
       <div className="flex items-center text-sm font-serif font-bold mb-[.5rem]">
         <div className="flex items-center w-[50%]">
           <FcLinux size={'2rem'} />
-          &nbsp;작성자 : &nbsp; {writerName}
+          &nbsp;작성자 : &nbsp; {nickname}
         </div>
         <div className="flex items-center w-[50%]">
           <IoLocation size={'2rem'} />
@@ -49,4 +51,4 @@ const Detail = (props: AccompanyDataType) => {
   );
 };
 
-export default Detail;
+export default DetailInfo;

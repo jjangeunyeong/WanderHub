@@ -1,13 +1,24 @@
-export interface AccompanyDataType {
+interface AccompanyCommonType {
   id: number;
-  memberId: number;
-  writerName: string;
   accompanyLocal: string;
   accompanyDate: string;
   maxNum: number;
   accompanyTitle: string;
   accompanyContent: string;
   openStatus: boolean;
-  createdAt: null; // 현재 어느타입으로 오는지모름 null | string일듯
-  modifiedAt: null; // 현재 어느타입으로 오는지모름 null | string일듯
+  createdAt: string | null;
+  modifiedAt: string | null;
+}
+
+export interface AccompanyDataType extends AccompanyCommonType {
+  memberId: number;
+  writerName: string;
+}
+
+export interface AccompanyDetailDataType extends AccompanyCommonType {
+  nickname: string;
+  coordX: number;
+  coordY: number;
+  placeTitle: string;
+  registeredMembers: number;
 }

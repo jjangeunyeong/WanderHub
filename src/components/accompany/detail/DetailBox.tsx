@@ -1,13 +1,30 @@
-import React from 'react';
-import { accompanyList } from '@/constant/DummyData';
+import React, { useEffect } from 'react';
 import KaKaoMap from '@components/Common/KaKaoMap';
-import Detail from './Detail';
 import { useParams } from 'react-router-dom';
+import DetailInfo from './DetailInfo';
 
+const detailDummyData = {
+  id: 1,
+  nickname: '야호호3',
+  accompanyLocal: '서울',
+  accompanyDate: '2023-08-12',
+  maxNum: 2,
+  accompanyTitle: '예쁜카페',
+  accompanyContent: '냠냠',
+  openStatus: true,
+  coordX: 126.984593106407,
+  coordY: 37.5638788701134,
+  placeTitle: '다이소',
+  registeredMembers: 1,
+  createdAt: '2023-06-29T06:25:00',
+  modifiedAt: '2023-06-29T06:25:00',
+};
 const DetailBox = () => {
-  // detail api호출해서 데이타를 컴포넌트에 프롭스로 내려줘야함
   const { accompanyId } = useParams();
-  // console.log('이값으로 api호출보내야함 :', accompanyId);
+  useEffect(() => {
+    console.log(accompanyId);
+  }, []);
+  // detail api호출해서 데이타를 컴포넌트에 프롭스로 내려줘야함
   return (
     <>
       <div className="flex justify-between mt-[.5rem]">
@@ -29,10 +46,14 @@ const DetailBox = () => {
       </div>
       <div className="flex justify-around mt-[.5rem]">
         <div className="w-[45%] rounded-lg overflow-hidden">
-          <KaKaoMap />
+          <KaKaoMap
+            mapX={detailDummyData.coordX}
+            mapY={detailDummyData.coordY}
+            placeTitle={detailDummyData.placeTitle}
+          />
         </div>
         <div className="w-[45%] border-2 p-2 rounded-lg">
-          <Detail {...accompanyList[accompanyId - 1]} />
+          <DetailInfo {...detailDummyData} />
         </div>
       </div>
     </>
