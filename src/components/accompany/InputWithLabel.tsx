@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import KaKaoSearchModal from './post/KaKaoSearchModal';
+import KakaoSearchModal from './post/KakaoSearchModal';
 interface LabelProps {
   htmlFor: string;
   classNameProps?: string;
@@ -118,7 +118,7 @@ const InputWithIcon = ({ id, handleChange }: InputProps) => {
           <AiOutlineSearch className="text-gray-500 cursor-pointer text-2xl hover:text-green-500" />
         </div>
       </div>
-      {isOpen && <KaKaoSearchModal handleModal={handleModal} getLocation={getLocation} />}
+      {isOpen && <KakaoSearchModal handleModal={handleModal} getLocation={getLocation} />}
     </>
   );
 };

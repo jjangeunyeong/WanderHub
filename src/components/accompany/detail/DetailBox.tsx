@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import KaKaoMap from '@components/Common/KaKaoMap';
+import KakaoMap from '@components/Common/KakaoMap';
 import { useParams } from 'react-router-dom';
 import DetailInfo from './DetailInfo';
 
@@ -46,7 +46,7 @@ const DetailBox = () => {
       </div>
       <div className="flex justify-around mt-[.5rem]">
         <div className="w-[45%] rounded-lg overflow-hidden">
-          <KaKaoMap
+          <KakaoMap
             mapX={detailDummyData.coordX}
             mapY={detailDummyData.coordY}
             placeTitle={detailDummyData.placeTitle}

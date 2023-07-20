@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-const useKaKaoLocalSearch = (searchVal: string, isAction: boolean) => {
+const useKakaoLocalSearch = (searchVal: string, isAction: boolean) => {
   const { data, isLoading, error } = useQuery(
     ['kakaoLocal', searchVal],
     async () => {
@@ -28,4 +28,4 @@ const useKaKaoLocalSearch = (searchVal: string, isAction: boolean) => {
   return { data, isLoading, error };
 };
 
-export default useKaKaoLocalSearch;
+export default useKakaoLocalSearch;

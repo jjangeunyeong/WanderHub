@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai';
 
-import useKaKaoLocalSearch from '@/hooks/queryHooks/useKaKaoLocalSearch';
-import { KaKaoLocalListType } from '@/types/kakaoType';
+import useKakaoLocalSearch from '@/hooks/queryHooks/useKakaoLocalSearch';
+import { KakaoLocalListType } from '@/types/kakaoType';
 import Spinner from '@components/Common/Spinner';
 
-interface KaKaoSearchModalProps {
+interface KakaoSearchModalProps {
   handleModal: () => void;
   getLocation: (place_name: string, x: string, y: string) => void;
 }
 interface ListComponentType {
-  data: KaKaoLocalListType[];
+  data: KakaoLocalListType[];
   getLocation: (place_name: string, x: string, y: string) => void;
 }
 
 const ListComponent = ({ data, getLocation }: ListComponentType) => {
   return (
     <div>
-      {data.map((item: KaKaoLocalListType, idx: number) => {
+      {data.map((item: KakaoLocalListType, idx: number) => {
         return (
           <div
             key={idx}
@@ -33,10 +33,10 @@ const ListComponent = ({ data, getLocation }: ListComponentType) => {
   );
 };
 
-const KaKaoSearchModal = ({ handleModal, getLocation }: KaKaoSearchModalProps) => {
+const KakaoSearchModal = ({ handleModal, getLocation }: KakaoSearchModalProps) => {
   const [searchVal, setSearchVal] = useState<string>('');
   const [isAction, setIsAction] = useState(false);
-  const { data, isLoading, error } = useKaKaoLocalSearch(searchVal, isAction);
+  const { data, isLoading, error } = useKakaoLocalSearch(searchVal, isAction);
   const getSearchText = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isAction) setIsAction(true);
@@ -86,4 +86,4 @@ const KaKaoSearchModal = ({ handleModal, getLocation }: KaKaoSearchModalProps) =
   );
 };
 
-export default KaKaoSearchModal;
+export default KakaoSearchModal;

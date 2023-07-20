@@ -1,13 +1,13 @@
 import React from 'react';
 import { Map, MapMarker, ZoomControl } from 'react-kakao-maps-sdk';
 
-interface KaKaoMapTypes {
+interface KakaoMapTypes {
   mapX: number;
   mapY: number;
   placeTitle: string;
 }
 
-const KaKaoMap = ({ mapX, mapY, placeTitle }: KaKaoMapTypes) => {
+const KakaoMap = ({ mapX, mapY, placeTitle }: KakaoMapTypes) => {
   if (mapX)
     return (
       <Map center={{ lat: mapY, lng: mapX }} className="w-full h-full min-h-[360px]">
@@ -17,6 +17,7 @@ const KaKaoMap = ({ mapX, mapY, placeTitle }: KaKaoMapTypes) => {
         </MapMarker>
       </Map>
     );
+  return null;
 };
 
-export default KaKaoMap;
+export default KakaoMap;
