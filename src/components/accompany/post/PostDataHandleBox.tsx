@@ -11,12 +11,11 @@ export interface FormDataType {
 }
 
 const PostDataHandleBox = () => {
-  const [accompanyDate, setAccompanyDate] = useState('');
+  const [accompanyDate, setAccompanyDate] = useState<string | null>('');
   const handleSubmit = (formData: FormDataType) => {
     console.log({ ...formData, accompanyDate });
   };
-  const getDate = (date: string) => {
-    console.log(date);
+  const getDate = (date: string | null) => {
     setAccompanyDate(date);
   };
 
@@ -24,7 +23,7 @@ const PostDataHandleBox = () => {
     <>
       <div className="flex justify-around mt-[2rem] mb-[2rem]">
         <div className="w-[45%]">
-          <ReactCalendar getDate={getDate} />
+          <ReactCalendar curDate={accompanyDate} getDate={getDate} />
         </div>
         <div className="w-[45%] border-2 shadow-md inset p-2 rounded-md">
           <PostForm handleSubmit={handleSubmit} />

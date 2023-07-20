@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface SvgMapProps {
-  pathList: Array<{ id: string; name: string; d: string }>;
+  pathList: Array<{ id: string; code: string; d: string; rnum: number }>;
   curLocal: string | null;
-  getLocalName: (name: string) => void;
+  getLocalName: (name: string | null) => void;
 }
 
 const SvgMap = ({ pathList, curLocal, getLocalName }: SvgMapProps) => {
-  // const [curTarget, setCurTarget] = useState('');
   const handleTarget = (targetId: string) => {
-    console.log(targetId);
-    // setCurTarget(targetId);
+    if (curLocal === targetId) {
+      getLocalName(null);
+      return;
+    }
     getLocalName(targetId);
   };
 
@@ -26,10 +27,14 @@ const SvgMap = ({ pathList, curLocal, getLocalName }: SvgMapProps) => {
           <path
             key={item.id}
             id={item.id}
-            name={item.name}
+            name={item.id}
             d={item.d}
             onClick={() => handleTarget(item.id)}
-            className={curLocal === item.id ? 'fill-primary' : 'hover:fill-gray-200 fill-white'}
+            className={
+              curLocal === item.id
+                ? 'fill-primary cursor-pointer'
+                : 'hover:fill-gray-200 fill-white cursor-pointer'
+            }
           />
         );
       })}

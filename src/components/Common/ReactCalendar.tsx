@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 import { formatDate } from '@/utils/commonUtil';
 
 interface ReactCalendarProps {
-  getDate: (date: string) => void;
+  curDate: string | null;
+  getDate: (date: string | null) => void;
 }
 
-const ReactCalendar = ({ getDate }: ReactCalendarProps) => {
-  const [date, setDate] = useState<Date | null>(null);
-  // const [date, setDate] = useState<Date>(new Date());
+const ReactCalendar = ({ curDate, getDate }: ReactCalendarProps) => {
   const handleDateChange = (targetDate: Value) => {
     if (targetDate instanceof Date) {
-      setDate(targetDate);
+      if (formatDate(targetDate) === curDate) {
+        getDate(null);
+        return;
+      }
       getDate(formatDate(targetDate));
     }
   };
-
-  return <Calendar value={date} onClickDay={handleDateChange} />;
+  return <Calendar value={curDate} onClickDay={handleDateChange} />;
 };
 
 export default ReactCalendar;

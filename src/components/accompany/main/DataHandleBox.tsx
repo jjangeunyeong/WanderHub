@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
-import ReactCalendar from '@components/Common/ReactCalendar';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import ReactCalendar from '@components/common/ReactCalendar';
 import SvgMap from '@components/accompany/main/SvgMap';
 import CardList from '@components/accompany/CardList';
 import { mapList } from '@/constant/MapPath';
 import { accompanyList } from '@/constant/DummyData';
+import useRouter from '@/hooks/useRouter';
+import { objectToQuerystring, querystringToObject } from '@/utils/commonUtil';
+import { useLocation } from 'react-router-dom';
 
 const DataHandleBox = () => {
-  // 타겟지역스테이트, 날짜스테이트, 데이터리스트스테이트
-  const [curLocal, setCurLcocal] = useState<null | string>(null);
+  const [curLocal, setCurLocal] = useState<null | string>(null);
   const [curDate, setCurDate] = useState<null | string>(null);
-  const getDate = (date: string) => {
-    console.log(date);
-    setCurDate(date);
-  };
-  const getLocalName = (name: string) => {
-    console.log(name);
-    setCurLcocal(name);
+  const { goTo } = useRouter();
+  const location = useLocation();
+
+  const handleRoute = (local: string | null, date: string | null) => {
+    const queryObj = { accompanyLocal: local, accompanyDate: date };
+    const filteredQuery = Object.entries(queryObj).reduce(
+      (acc, [key, value]) => (value ? { ...acc, [key]: value } : acc),
+      {},
+    );
+    goTo(objectToQuerystring(filteredQuery), true);
   };
 
+  const getLocalName = (name: string | null) => {
+    setCurLocal(name);
+    handleRoute(name, curDate);
+  };
+
+  const getDate = (date: string | null) => {
+    setCurDate(date);
+    handleRoute(curLocal, date);
+  };
+
+  useEffect(() => {
+    if (!location.search) {
+      setCurLocal(null);
+      setCurDate(null);
+    }
+  }, [location]);
+  useLayoutEffect(() => {
+    const queryLocation = querystringToObject(location.search);
+    if (queryLocation.accompanyLocal) setCurLocal(decodeURI(queryLocation.accompanyLocal));
+    if (queryLocation.accompanyDate) setCurDate(queryLocation.accompanyDate);
+  }, []);
   return (
     <section className="my-3">
       <div className="flex justify-around">
@@ -25,7 +51,7 @@ const DataHandleBox = () => {
           <SvgMap pathList={mapList} curLocal={curLocal} getLocalName={getLocalName} />
         </div>
         <div className="w-[45%] max-h-[50vh]">
-          <ReactCalendar getDate={getDate} />
+          <ReactCalendar curDate={curDate} getDate={getDate} />
         </div>
       </div>
       {(curDate || curLocal) && (
