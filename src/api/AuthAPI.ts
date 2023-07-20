@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { WANDERHUB } from '@/api/BASEURL';
 
 const instance = axios.create({
   baseURL: '/v1',

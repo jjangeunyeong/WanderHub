@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Footer from '@components/Common/Footer';
 import Header from '@components/Common/Header';
 import Container from '@components/Common/Container';
-import Title from '@/components/accompany/Title';
-import DataHandleBox from '@/components/accompany/main/DataHandleBox';
+import Title from '@components/accompany/Title';
+import DataHandleBox from '@components/accompany/main/DataHandleBox';
 import useRouter from '@/hooks/useRouter';
 import Modal from '@pages/Login/Modal';
 

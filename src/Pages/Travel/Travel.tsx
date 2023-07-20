@@ -18,7 +18,7 @@ const Travel = () => {
   const [curPage, setCurPage] = useState<number>(1);
   const { goTo } = useRouter();
   const location = useLocation();
-  const { data, isLoading, error } = useGetTravelList(location.search);
+  const { data, isLoading } = useGetTravelList(location.search);
   const handlePageNation = (page: number) => {
     console.log(page);
     setCurPage(page);

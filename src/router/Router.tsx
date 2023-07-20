@@ -9,7 +9,6 @@ import Writing from '@pages/Community/Writing/Writing';
 import NotFound from '@pages/NotFound.tsx/NotFound';
 import MyPage from '@pages/MyPage/MyPage';
 import Redirection from '@pages/Login/Redirection';
-import LoginTest from '@pages/Login/LoginTest';
 import Travel from '@pages/Travel/Travel';
 import TravelDetail from '@pages/Travel/TravelDetail';
 import CommunityDetail from '@pages/Community/Detail/CommunityDetail';
@@ -18,7 +17,6 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<LoginTest />} />
       <Route path="/accompany" element={<Accompany />} />
       <Route path="/accompany/post" element={<AccompanyPost />} />
       <Route path="/accompany/:accompanyId" element={<AccompanyDetail />} />

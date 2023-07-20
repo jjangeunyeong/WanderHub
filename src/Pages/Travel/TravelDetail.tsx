@@ -12,7 +12,7 @@ import ContentRightBox from '@components/travel/detail/ContentRightBox';
 const TravelDetail = () => {
   const [openModal, setOpenModal] = useState(false);
   const params = useParams();
-  const { data, isLoading, error } = useGetTravelDetail(String(params.contentId));
+  const { data, isLoading } = useGetTravelDetail(String(params.contentId));
   console.log(data);
 
   return (

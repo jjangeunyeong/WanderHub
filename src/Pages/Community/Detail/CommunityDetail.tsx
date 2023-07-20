@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Header from '@components/common/Header';
-import Footer from '@components/common/Footer';
+import Header from '@components/Common/Header';
+import Footer from '@components/Common/Footer';
 import MainLogo from '@assets/logo.png';
 import ViewIcon from '@assets/viewsIcon.png';
+import Modal from '@pages/Login/Modal';
 
 const CommunityDetail = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -35,6 +36,7 @@ const CommunityDetail = () => {
           <div>본문</div>
         </div>
       </div>
+      {openModal ? <Modal setOpenModal={setOpenModal} /> : ''}
       <Footer />
     </div>
   );

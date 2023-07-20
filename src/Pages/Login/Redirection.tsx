@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthAPI from '@/api/AuthAPI';
+//import AuthAPI from '@/api/AuthAPI';
 import WanderHubAPI from '@/api/WanderHubAPI';
 
 const Redirection = () => {
   const code = new URL(window.location.href);
   const navigate = useNavigate();
   const accessToken: string | null = code.searchParams.get('access_token');
-  const isNewbie = code.searchParams.get('newbie');
+  //const isNewbie = code.searchParams.get('newbie');
   const [nickName, setNickName] = useState('');
 
   if (accessToken !== null) {

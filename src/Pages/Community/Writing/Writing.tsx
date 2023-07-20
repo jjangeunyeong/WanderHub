@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Header from '@components/common/Header';
+import Header from '@components/Common/Header';
+import Modal from '@pages/Login/Modal';
 
 const Writing = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -114,6 +115,7 @@ const Writing = () => {
           </button>
         </div>
       </div>
+      {openModal ? <Modal setOpenModal={setOpenModal} /> : ''}
     </div>
   );
 };
