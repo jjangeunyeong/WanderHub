@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '@components/common/Footer';
 import Header from '@components/common/Header';
-import Container from '@/components/common/Container';
+import Container from '@components/common/Container';
 import Modal from '@/pages/Login/Modal';
 import { useLocation } from 'react-router-dom';
 import RegionBtns from '@components/travel/main/RegionBtns';

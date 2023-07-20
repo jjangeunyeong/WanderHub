@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Footer from '@components/common/Footer';
 import Header from '@components/common/Header';
-import Container from '@/components/common/Container';
+import Container from '@components/common/Container';
 import Modal from '@pages/Login/Modal';
 import Title from '@components/accompany/Title';
 import DetailBox from '@components/accompany/detail/DetailBox';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Header from '@components/Common/Header';
-import Footer from '@components/Common/Footer';
+import Header from '@components/common/Header';
+import Footer from '@components/common/Footer';
 import MainLogo from '@assets/logo.png';
 import ViewIcon from '@assets/viewsIcon.png';
 

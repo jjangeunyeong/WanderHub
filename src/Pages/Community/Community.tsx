@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from '@components/Common/Header';
+import Header from '@components/common/Header';
 import Modal from '@pages/Login/Modal';
 import Board from '@pages/Community/Board';
 

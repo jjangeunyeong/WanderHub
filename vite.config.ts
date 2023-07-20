@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
       alias: [
         { find: '@assets', replacement: '/src/assets' },
         { find: '@components', replacement: '/src/components' },
-        { find: '@pages', replacement: '/src/pages' },
+        { find: '@pages', replacement: '/src/Pages' },
         { find: '@', replacement: '/src' },
       ],
     },
