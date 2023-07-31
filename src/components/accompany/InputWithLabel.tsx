@@ -1,31 +1,24 @@
 import React, { ChangeEvent, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import KakaoSearchModal from './post/KakaoSearchModal';
+import { KakaoSearchValType } from './post/PostForm';
+
 interface LabelProps {
   htmlFor: string;
   classNameProps?: string;
   labelText: string;
 }
-export interface InputProps {
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   value: string | number;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | KakaoSearchValType,
+  ) => void;
   classNameProps?: string;
   id: string;
   compType?: string;
   isReadOnly: boolean;
-  type?:
-    | 'text'
-    | 'number'
-    | 'password'
-    | 'email'
-    | 'tel'
-    | 'url'
-    | 'date'
-    | 'time'
-    | 'checkbox'
-    | 'radio'
-    | 'file';
 }
 
 interface InputWithLabelProps {
@@ -86,6 +79,7 @@ const Textarea = ({ placeholder, value, handleChange, id, isReadOnly }: InputPro
     }
   />
 );
+
 const InputWithIcon = ({ id, handleChange }: InputProps) => {
   const [locationVal, setLocationVal] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -93,9 +87,58 @@ const InputWithIcon = ({ id, handleChange }: InputProps) => {
   const handleModal = () => {
     setIsOpen(!isOpen);
   };
-  const getLocation = (place_name: string, x: string, y: string) => {
-    console.log('@@@@@', place_name, x, y);
-    handleChange(place_name);
+  const getLocalName = (localName: string): string => {
+    const beforeName = localName.split(' ')[0];
+    let returnName = '';
+    switch (beforeName) {
+      case '강원특별자치도':
+        return (returnName = '강원도');
+      case '경기':
+        return (returnName = '경기도');
+      case '경남':
+        return (returnName = '경상남도');
+      case '경북':
+        return (returnName = '경상북도');
+      case '광주':
+        return (returnName = '광주');
+      case '대구':
+        return (returnName = '대구');
+      case '대전':
+        return (returnName = '대전');
+      case '부산':
+        return (returnName = '부산');
+      case '서울':
+        return (returnName = '서울');
+      case '세종특별자치시':
+        return (returnName = '세종');
+      case '울산':
+        return (returnName = '울산');
+      case '인천':
+        return (returnName = '인천');
+      case '전남':
+        return (returnName = '전라남도');
+      case '전북':
+        return (returnName = '전라북도');
+      case '제주특별자치도':
+        return (returnName = '제주도');
+      case '충남':
+        return (returnName = '충청남도');
+      case '충북':
+        return (returnName = '충청북도');
+    }
+    return returnName;
+  };
+  const getLocation = (address_name: string, place_name: string, x: string, y: string) => {
+    console.log(place_name, x, y);
+    getLocalName(address_name);
+    const test = {
+      placeTitle: place_name,
+      accompanyLocal: getLocalName(address_name),
+      coordX: x,
+      coordY: y,
+    };
+    handleChange(test);
+    // handleChange(place_name, x);
     setLocationVal(place_name);
     handleModal();
   };

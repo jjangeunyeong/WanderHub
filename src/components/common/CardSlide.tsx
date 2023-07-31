@@ -7,19 +7,19 @@ import Card from '@components/accompany/Card';
 import { AccompanyDataType } from '@/types/accompanyType';
 
 const cardSlideSet = {
-  dots: true,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 4,
-  initialSlide: 0,
+  // initialSlide: 0,
+  initialSlide: 1,
+  dots: true,
   infinite: true,
   responsive: [
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        dots: true,
+        slidesToShow: 2,
+        slidesToScroll: 2,
       },
     },
     {
@@ -27,7 +27,8 @@ const cardSlideSet = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2,
+        initialSlide: 1,
+        // initialSlide: 2,
       },
     },
     {

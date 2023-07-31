@@ -1,14 +1,46 @@
 import Pagenation from '@components/common/Pagenation';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableItem from './TableItem';
+import WanderHubAPI from '@/api/WanderHubAPI';
+import { BoardType } from '@/types/boardType';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '@/recoil/login/userInfoAtoms';
+import { AccompanyDetailDataType } from '@/types/accompanyType';
 
 const myBoardTapList: { tabTxt: string; tabName: string }[] = [
   { tabTxt: '#나의동행글', tabName: 'myAccompany' },
-  { tabTxt: '#나의댓글', tabName: 'myComment' },
+  { tabTxt: '#나의커뮤니티글', tabName: 'myComment' },
 ];
 const MyBoard = () => {
   const [curMenu, setMenu] = useState('myAccompany');
   const [curPage, setCurPage] = useState<number>(1);
+  const [myCommunityPost, setmyCommunityPost] = useState<BoardType[]>();
+  const [myAccompanyPost, setMyAccompanyPost] = useState<AccompanyDetailDataType[]>();
+  const userInfo = useRecoilValue(userInfoAtom);
+
+  const getmyCommunityPost = async () => {
+    const res = await WanderHubAPI.get('/community');
+    const totalBoardNum = res.data.pageInfo.totalElements;
+    const { data } = await WanderHubAPI.get(`/community?page=0&size=${totalBoardNum}`);
+    const boardAll = data.data;
+    const newBoards = boardAll.filter((board: BoardType) => board.nickName === userInfo.nickName);
+    setmyCommunityPost(newBoards);
+  };
+
+  const getMyAccompanyPost = async () => {
+    const { data } = await WanderHubAPI.get('/accompany?size=100');
+    const accompanyAll = data.data;
+    const newAccompany = accompanyAll.filter(
+      (post: AccompanyDetailDataType) => post.nickname === userInfo.nickName,
+    );
+    setMyAccompanyPost(newAccompany);
+  };
+
+  useEffect(() => {
+    if (curMenu === 'myAccompany') getMyAccompanyPost();
+    else getmyCommunityPost();
+  }, [curMenu]);
+
   const handlePageNation = (page: number) => {
     setCurPage(page);
   };
@@ -26,7 +58,10 @@ const MyBoard = () => {
                     ? 'mx-[.5rem] px-4 py-2 text-black border-b border-black'
                     : 'mx-[.5rem] px-4 py-2 text-gray-300 hover:text-black'
                 }
-                onClick={() => setMenu(item.tabName)}
+                onClick={() => {
+                  setMenu(item.tabName);
+                  setCurPage(1);
+                }}
               >
                 {item.tabTxt}
               </button>
@@ -57,7 +92,7 @@ const MyBoard = () => {
                     scope="col"
                     className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
                   >
-                    여행날짜
+                    {curMenu === 'myAccompany' ? '여행날짜' : '수정날짜'}
                   </th>
                   <th
                     scope="col"
@@ -74,14 +109,51 @@ const MyBoard = () => {
                 </tr>
               </thead>
               <tbody>
-                {Array(10)
-                  .fill(null)
-                  .map((_, idx) => {
-                    return <TableItem key={idx} />;
-                  })}
+                {curMenu === 'myAccompany' &&
+                  (myAccompanyPost && myAccompanyPost.length !== 0 ? (
+                    myAccompanyPost
+                      .slice((curPage - 1) * 10, curPage * 10)
+                      .map((accompanyBoard, idx) => {
+                        return (
+                          <TableItem curMenu={curMenu} accompanyBoard={accompanyBoard} key={idx} />
+                        );
+                      })
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="p-8 pb-16">
+                        작성한 글 없음
+                      </td>
+                    </tr>
+                  ))}
+                {curMenu === 'myComment' &&
+                  (myCommunityPost && myCommunityPost.length !== 0 ? (
+                    myCommunityPost.map((communityBoard, idx) => {
+                      return (
+                        <TableItem curMenu={curMenu} communityBoard={communityBoard} key={idx} />
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="p-8 pb-16">
+                        작성한 글 없음
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
-            <Pagenation totalPages={20} curPage={curPage} handlePageNation={handlePageNation} />
+            <Pagenation
+              totalPages={
+                curMenu === 'myAccompany'
+                  ? myAccompanyPost
+                    ? Math.ceil(myAccompanyPost.length / 10)
+                    : 1
+                  : myCommunityPost
+                  ? Math.ceil(myCommunityPost.length / 10)
+                  : 1
+              }
+              curPage={curPage}
+              handlePageNation={handlePageNation}
+            />
           </div>
         </div>
       </div>

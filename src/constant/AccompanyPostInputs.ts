@@ -18,23 +18,7 @@ export const accompanyPostInputs: Array<{
   isReadOnly: boolean;
 }> = [
   {
-    htmlFor: 'nickname',
-    labelText: '닉네임',
-    placeholder: '닉네임을 입력하세요',
-    type: 'text',
-    compType: 'input',
-    isReadOnly: false,
-  },
-  {
-    htmlFor: 'maxPeople',
-    labelText: '최대인원',
-    placeholder: '숫자를 입력해주세요.',
-    type: 'number',
-    compType: 'input',
-    isReadOnly: false,
-  },
-  {
-    htmlFor: 'location',
+    htmlFor: 'placeTitle',
     labelText: '장소',
     placeholder: '장소를 검색해주세요.',
     type: 'text',
@@ -42,7 +26,15 @@ export const accompanyPostInputs: Array<{
     isReadOnly: true,
   },
   {
-    htmlFor: 'title',
+    htmlFor: 'maxNum',
+    labelText: '최대인원',
+    placeholder: '숫자를 입력해주세요.',
+    type: 'number',
+    compType: 'input',
+    isReadOnly: false,
+  },
+  {
+    htmlFor: 'accompanyTitle',
     labelText: '제목',
     placeholder: '제목을 입력해주세요.',
     type: 'text',
@@ -50,7 +42,7 @@ export const accompanyPostInputs: Array<{
     isReadOnly: false,
   },
   {
-    htmlFor: 'content',
+    htmlFor: 'accompanyContent',
     labelText: '내용',
     placeholder: '내용을 입력해주세요.',
     type: 'text',

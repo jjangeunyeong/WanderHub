@@ -1,24 +1,45 @@
 import React, { useState } from 'react';
 import ReactCalendar from '@components/common/ReactCalendar';
 import PostForm from '@components/accompany/post/PostForm';
+import usePostAccompany from '@/hooks/queryHooks/usePostAccompany';
+import useRouter from '@/hooks/useRouter';
+import { AxiosError } from 'axios';
 
 export interface FormDataType {
-  content: string;
-  location: string;
-  maxPeople: number | string;
-  nickname: string;
-  title: string;
+  maxNum: number | string;
+  placeTitle: string;
+  accompanyTitle: string;
+  accompanyContent: string;
+  accompanyLocal: string;
+  coordX: string;
+  coordY: string;
 }
 
 const PostDataHandleBox = () => {
   const [accompanyDate, setAccompanyDate] = useState<string | null>('');
+  const { mutate, isLoading } = usePostAccompany();
+  const { goTo } = useRouter();
+  console.log(isLoading);
+  const getDate = (date: string | null) => setAccompanyDate(date);
   const handleSubmit = (formData: FormDataType) => {
-    console.log({ ...formData, accompanyDate });
+    const params = { ...formData, accompanyDate };
+    if (accompanyDate) {
+      mutate(params, {
+        onSuccess: () => {
+          goTo(-1);
+        },
+        onError: (error: unknown) => {
+          const axiosError = error as AxiosError;
+          if (axiosError.message === 'Request failed with status code 500') {
+            alert('로그인이 필요합니다.');
+          }
+        },
+      });
+      console.log({ ...formData, accompanyDate });
+    } else {
+      alert('날짜를 선택해주세요.');
+    }
   };
-  const getDate = (date: string | null) => {
-    setAccompanyDate(date);
-  };
-
   return (
     <>
       <div className="flex justify-around mt-[2rem] mb-[2rem]">

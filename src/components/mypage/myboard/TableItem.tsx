@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
+import { BoardType } from '@/types/boardType';
+import { AccompanyDetailDataType } from '@/types/accompanyType';
 
-const TableItem = () => {
+interface TableItemProps {
+  curMenu: string;
+  communityBoard?: BoardType;
+  accompanyBoard?: AccompanyDetailDataType;
+}
+const TableItem = ({ curMenu, communityBoard, accompanyBoard }: TableItemProps) => {
   const [isToggle, setIsToggle] = useState(false);
 
   const toggleDropdown = () => {
@@ -12,16 +19,28 @@ const TableItem = () => {
     <>
       <tr>
         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-          <p className="text-gray-900 whitespace-no-wrap">서울</p>
+          <p className="text-gray-900 whitespace-no-wrap">
+            {curMenu === 'myAccompany' ? accompanyBoard?.accompanyLocal : communityBoard?.local}
+          </p>
         </td>
         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-          <p className="text-gray-900 whitespace-no-wrap">2023-06-16</p>
+          <p className="text-gray-900 whitespace-no-wrap">
+            {curMenu === 'myAccompany'
+              ? accompanyBoard?.createdAt?.slice(0, 10)
+              : communityBoard?.createdAt.slice(0, 10)}
+          </p>
         </td>
         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-          <p className="text-gray-900 whitespace-no-wrap">2023-07-16</p>
+          <p className="text-gray-900 whitespace-no-wrap">
+            {curMenu === 'myAccompany'
+              ? accompanyBoard?.accompanyDate.slice(0, 10)
+              : communityBoard?.modifiedAt.slice(0, 10)}
+          </p>
         </td>
         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-          <p className="text-gray-900 whitespace-no-wrap">반포대교놀러가요!</p>
+          <p className="text-gray-900 whitespace-no-wrap">
+            {curMenu === 'myAccompany' ? accompanyBoard?.accompanyTitle : communityBoard?.title}
+          </p>
         </td>
         <td className="pr-2 py-5 text-sm bg-white border-b border-gray-200">
           <button onClick={toggleDropdown}>
@@ -33,9 +52,9 @@ const TableItem = () => {
         <tr>
           <td className="px-5 py-5 w-full" colSpan={5}>
             <div>
-              123123123123123123123 123123123123123123123 123123123123123123123
-              123123123123123123123 123123123123123123123 123123123123123123123
-              123123123123123123123 123123123123123123123 123123123123123123123
+              {curMenu === 'myAccompany'
+                ? accompanyBoard?.accompanyContent
+                : communityBoard?.content}
             </div>
           </td>
         </tr>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '@assets/logo.png';
-import { useLocation } from 'react-router-dom';
-import { ModalProps } from '@pages/Login/Modal';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { modalIsOpenAtom } from '@/recoil/login/loginModalAtoms';
 
 const LinkList = [
   {
@@ -19,19 +20,20 @@ const LinkList = [
   },
 ];
 
-const Header = ({ setOpenModal }: ModalProps) => {
+const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [assignBtn, setAssignBtn] = useState('');
+  const setModalIsOpen = useSetRecoilState(modalIsOpenAtom);
+
   const clickLoginBtn = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
-    if (localStorage.getItem('accessToken')) {
+    if (localStorage.getItem('accessToken') !== null) {
       localStorage.removeItem('accessToken');
       setAssignBtn('로그인');
-      setOpenModal(false);
-    } else {
-      setOpenModal(true);
-    }
+      setModalIsOpen(false);
+    } else setModalIsOpen(true);
   };
 
   useEffect(() => {
@@ -65,10 +67,21 @@ const Header = ({ setOpenModal }: ModalProps) => {
           })}
         </ul>
         <div>
+          {localStorage.getItem('accessToken') ? (
+            <button
+              className={
+                'text-gray-300 hover:text-white border border-gray-300 rounded-full px-4 py-2'
+              }
+              onClick={() => navigate('/mypage')}
+            >
+              마이페이지
+            </button>
+          ) : null}
+
           <button
             onClick={e => clickLoginBtn(e)}
             className={
-              'text-gray-300 hover:text-white border border-gray-300 rounded-full px-4 py-2'
+              'text-gray-300 hover:text-white border border-gray-300 rounded-full px-4 py-2 ml-2'
             }
           >
             {assignBtn}

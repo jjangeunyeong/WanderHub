@@ -3,31 +3,45 @@ import React, { ChangeEvent, useState } from 'react';
 import InputWithLabel from '@components/accompany/InputWithLabel';
 import { FormDataType } from './PostDataHandleBox';
 
-const initialState = {
-  nickname: '',
-  maxPeople: '',
-  location: '',
-  title: '',
-  content: '',
+const initialState: FormDataType = {
+  // nickname: '',
+  maxNum: '',
+  placeTitle: '',
+  accompanyTitle: '',
+  accompanyContent: '',
+  accompanyLocal: '',
+  coordX: '',
+  coordY: '',
 };
 interface PostFormProps {
   handleSubmit: (formData: FormDataType) => void;
+}
+export interface KakaoSearchValType {
+  placeTitle: string;
+  accompanyLocal: string;
+  coordX: string;
+  coordY: string;
 }
 
 const PostForm = ({ handleSubmit }: PostFormProps) => {
   const [form, setForm] = useState<FormDataType>({ ...initialState });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string) => {
-    if (typeof e === 'string') {
+  const handleChange = (
+    val: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | KakaoSearchValType,
+  ) => {
+    if ('placeTitle' in val) {
       setForm({
         ...form,
-        ['location']: e,
+        ['placeTitle']: val.placeTitle,
+        ['accompanyLocal']: val.accompanyLocal,
+        ['coordX']: val.coordX,
+        ['coordY']: val.coordY,
       });
       return;
     }
     setForm({
       ...form,
-      [e.target.id]: e.target.id !== 'maxPeople' ? e.target.value : parseInt(e.target.value),
+      [val.target.id]: val.target.id !== 'maxNum' ? val.target.value : parseInt(val.target.value),
     });
   };
   const getFormData = (e: React.FormEvent) => {

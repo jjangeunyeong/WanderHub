@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Footer from '@components/common/Footer';
 import Header from '@components/common/Header';
 import Container from '@components/common/Container';
-import Modal from '@pages/Login/Modal';
 import useGetTravelDetail from '@/hooks/queryHooks/useGetTravelDetail';
 import { useParams } from 'react-router-dom';
 import Spinner from '@components/common/Spinner';
@@ -10,14 +9,13 @@ import ContentLeftBox from '@components/travel/detail/ContentLeftBox';
 import ContentRightBox from '@components/travel/detail/ContentRightBox';
 
 const TravelDetail = () => {
-  const [openModal, setOpenModal] = useState(false);
   const params = useParams();
   const { data, isLoading } = useGetTravelDetail(String(params.contentId));
   console.log(data);
 
   return (
     <>
-      <Header setOpenModal={setOpenModal} />
+      <Header />
       <Container>
         {isLoading && <Spinner />}
         {data && (
@@ -27,7 +25,6 @@ const TravelDetail = () => {
           </div>
         )}
       </Container>
-      {openModal ? <Modal setOpenModal={setOpenModal} /> : ''}
       <Footer />
     </>
   );

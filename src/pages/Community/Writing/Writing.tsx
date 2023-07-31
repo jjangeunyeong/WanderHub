@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
 import Header from '@components/common/Header';
-import Modal from '@pages/Login/Modal';
+import Footer from '@components/common/Footer';
+import AuthAPI from '@/api/AuthAPI';
+import { useNavigate } from 'react-router-dom';
+
+export const regions: string[] = [
+  '서울',
+  '제주도',
+  '경기도',
+  '강원도',
+  '부산',
+  '울산',
+  '대구',
+  '대전',
+  '광주',
+  '세종',
+  '인천',
+  '충청남도',
+  '충청북도',
+  '경상남도',
+  '경상북도',
+  '전라남도',
+  '전라북도',
+];
 
 const Writing = () => {
-  const [openModal, setOpenModal] = useState(false);
   const [showRegionDropdown, setShowRegionDropdown] = useState<boolean>(false);
   const [curRegion, setCurRegion] = useState('지역 선택');
   const [post, setPost] = useState({ title: '', content: '' });
-
-  const regions: string[] = [
-    '서울',
-    '제주도',
-    '경기도',
-    '강원도',
-    '부산',
-    '울산',
-    '대구',
-    '대전',
-    '광주',
-    '세종',
-    '인천',
-    '충청남도',
-    '충청북도',
-    '경상남도',
-    '경상북도',
-    '전라남도',
-    '전라북도',
-  ];
+  const navigate = useNavigate();
 
   const handleSelectRegion = (e: React.MouseEvent<HTMLElement>, region: string) => {
     e.preventDefault();
@@ -34,18 +36,23 @@ const Writing = () => {
     setShowRegionDropdown(false);
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
+  const handlePosting = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if (post.title === '' || post.content === '') {
       window.alert('제목과 본문은 필수 입력사항입니다.');
+    } else {
+      const postData = { ...post, local: curRegion };
+      const res = await AuthAPI.post('/community', postData);
+      const boardId = res.data.data.boardId;
+      navigate(`/community/${boardId}`);
     }
   };
 
   return (
     <div>
-      <Header setOpenModal={setOpenModal} />
+      <Header />
       <div className="flex items-center justify-center">
-        <div className="w-2/3 mt-10">
+        <div className="w-[50%] mt-12">
           <div className="mb-6 text-2xl text-gray-800 dark:text-white">
             여행의 추억을 공유해 보아요!
           </div>
@@ -65,7 +72,7 @@ const Writing = () => {
             <div className="mb-1">지역</div>
             <button
               id="contact-form-region"
-              className="rounded-lg appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              className="rounded-lg appearance-none border border-gray-300 w-full py-2 px-4 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               placeholder=""
               onClick={() => setShowRegionDropdown(!showRegionDropdown)}
             >
@@ -78,11 +85,11 @@ const Writing = () => {
               >
                 {regions.map(region => {
                   return (
-                    <div key={region}>
-                      <li
-                        className="p-2 hover:bg-blue-100"
-                        onClick={e => handleSelectRegion(e, region)}
-                      >
+                    <div
+                      className="first:rounded-t-lg last:rounded-b-lg hover:bg-blue-100"
+                      key={region}
+                    >
+                      <li className="p-2 pl-4" onClick={e => handleSelectRegion(e, region)}>
                         {region}
                       </li>
                     </div>
@@ -95,7 +102,7 @@ const Writing = () => {
             <div className="mb-1">본문</div>
             <label className="text-gray-700" htmlFor="name">
               <textarea
-                className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                className="h-[300px] flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 id="comment"
                 placeholder="Content"
                 name="comment"
@@ -108,14 +115,14 @@ const Writing = () => {
             </label>
           </div>
           <button
-            className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-            onClick={e => handleSubmit(e)}
+            className="py-2 px-4 mb-16 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+            onClick={e => handlePosting(e)}
           >
             등록
           </button>
         </div>
       </div>
-      {openModal ? <Modal setOpenModal={setOpenModal} /> : ''}
+      <Footer />
     </div>
   );
 };

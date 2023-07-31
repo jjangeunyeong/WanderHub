@@ -1,61 +1,96 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import KakaoMap from '@components/common/KakaoMap';
 import { useParams } from 'react-router-dom';
 import DetailInfo from './DetailInfo';
+import useGetAccompanyDetail from '@/hooks/queryHooks/useGetAccompanyDetail';
+import Spinner from '@components/common/Spinner';
+import usePostJoinAccompany from '@/hooks/queryHooks/usePostJoinAccompany';
+import useDeleteQuitAccompany from '@/hooks/queryHooks/useDeleteQuitAccompany';
+import { AxiosError } from 'axios';
 
-const detailDummyData = {
-  id: 1,
-  nickname: '야호호3',
-  accompanyLocal: '서울',
-  accompanyDate: '2023-08-12',
-  maxNum: 2,
-  accompanyTitle: '예쁜카페',
-  accompanyContent: '냠냠',
-  openStatus: true,
-  coordX: 126.984593106407,
-  coordY: 37.5638788701134,
-  placeTitle: '다이소',
-  registeredMembers: 1,
-  createdAt: '2023-06-29T06:25:00',
-  modifiedAt: '2023-06-29T06:25:00',
-};
 const DetailBox = () => {
   const { accompanyId } = useParams();
-  useEffect(() => {
-    console.log(accompanyId);
-  }, []);
-  // detail api호출해서 데이타를 컴포넌트에 프롭스로 내려줘야함
+  const { data, isLoading } = useGetAccompanyDetail(accompanyId);
+  const joinAccompanyMutation = usePostJoinAccompany();
+  const deleteQuitAccompanyMutation = useDeleteQuitAccompany();
+
+  const handleJoin = (id: string) => {
+    joinAccompanyMutation.mutate(id, {
+      onSuccess: () => alert('참여가 완료되었습니다.'),
+      onError: (error: unknown) => {
+        const axiosError = error as AxiosError;
+        const message = (axiosError.response?.data as { message: string }).message;
+        if (axiosError.message === 'Request failed with status code 500') {
+          alert('로그인이 필요합니다.');
+        } else {
+          handleErrorAlert(message);
+        }
+      },
+    });
+  };
+
+  const handleQuit = (id: string) => {
+    deleteQuitAccompanyMutation.mutate(id, {
+      onSuccess: () => alert('탈퇴가 완료되었습니다.'),
+      onError: (error: unknown) => {
+        const axiosError = error as AxiosError;
+        const message = (axiosError.response?.data as { message: string }).message;
+        if (axiosError.message === 'Request failed with status code 500') {
+          alert('로그인이 필요합니다.');
+        } else {
+          handleErrorAlert(message);
+        }
+      },
+    });
+  };
+  const handleErrorAlert = (msg: string) => {
+    switch (msg) {
+      case 'Cannot quit as not a member':
+        alert('참여멤버가 아니면 탈퇴를 할 수 없습니다.');
+        break;
+      case 'Cannot quit as you made':
+        alert('본인의 동행글은 탈퇴 할 수 없습니다.');
+        break;
+      case 'Already joined':
+        alert('이미 참여중입니다.');
+        break;
+      case 'Max num over':
+        alert('참여인원이 꽉 찼습니다.');
+        break;
+    }
+  };
+
   return (
     <>
-      <div className="flex justify-between mt-[.5rem]">
-        <button
-          className={
-            'text-gray-300 mb-[.5rem] hover:text-white border border-gray-300 rounded-lg px-4 py-2 bg-primary'
-          }
-        >
-          이 여행자의 다른여행일정
-        </button>
-        <button
-          onClick={() => console.log('click!')}
-          className={
-            'text-gray-300 mb-[.5rem] hover:text-white border border-gray-300 rounded-lg px-4 py-2 bg-primary'
-          }
-        >
-          참여하기
-        </button>
-      </div>
-      <div className="flex justify-around mt-[.5rem]">
-        <div className="w-[45%] rounded-lg overflow-hidden">
-          <KakaoMap
-            mapX={detailDummyData.coordX}
-            mapY={detailDummyData.coordY}
-            placeTitle={detailDummyData.placeTitle}
-          />
-        </div>
-        <div className="w-[45%] border-2 p-2 rounded-lg">
-          <DetailInfo {...detailDummyData} />
-        </div>
-      </div>
+      {isLoading && <Spinner />}
+      {data && (
+        <>
+          <div className="flex justify-end mt-[.5rem]">
+            <div>
+              <button
+                onClick={() => accompanyId && handleJoin(accompanyId)}
+                className="text-gray-300 mb-[.5rem] hover:text-white border border-gray-300 rounded-lg px-4 py-2 bg-primary"
+              >
+                참여하기
+              </button>
+              <button
+                onClick={() => accompanyId && handleQuit(accompanyId)}
+                className="text-gray-300 mb-[.5rem] hover:text-white border border-gray-300 rounded-lg px-4 py-2 bg-primary ml-2"
+              >
+                탈퇴하기
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-around mt-[.5rem]">
+            <div className="w-[45%] rounded-lg overflow-hidden">
+              <KakaoMap mapX={data.coordX} mapY={data.coordY} placeTitle={data.placeTitle} />
+            </div>
+            <div className="w-[45%] border-2 p-2 rounded-lg">
+              <DetailInfo {...data} />
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

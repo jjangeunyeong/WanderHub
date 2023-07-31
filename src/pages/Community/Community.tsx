@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '@components/common/Header';
-import Modal from '@pages/Login/Modal';
-import Board from '@pages/Community/Board';
+import Button from '@pages/Community/Button';
+import PostList from '@pages/Community/PostList';
+import Footer from '@components/common/Footer';
 
 const Community = () => {
-  const [openModal, setOpenModal] = useState(false);
   return (
     <div>
-      <Header setOpenModal={setOpenModal} />
-      <Board />
-      {openModal ? <Modal setOpenModal={setOpenModal} /> : ''}
+      <Header />
+      <div className="flex justify-center relative">
+        <div className="flex flex-col w-[70%] mb-10 min-h-[80vh]">
+          <Button />
+          <PostList />
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };

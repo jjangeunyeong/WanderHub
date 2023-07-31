@@ -7,22 +7,6 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use(request => {
-  const accessToken = localStorage.getItem('accessToken');
-  if (accessToken !== null) {
-    request.headers.authorization = `Bearer ${accessToken}`;
-  }
-  return request;
-});
-
-instance.interceptors.response.use(response => {
-  const accessToken = localStorage.getItem('accessToken');
-  response.headers = {
-    authorization: `Bearer ${accessToken}`,
-  };
-  return response;
-});
-
 const WanderHubAPI = {
   get: (url: string) => instance.get(url),
   delete: (url: string) => instance.delete(url),

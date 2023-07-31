@@ -1,18 +1,22 @@
 interface AccompanyCommonType {
   id: number;
+  nickName?: string;
   accompanyLocal: string;
   accompanyDate: string;
   maxNum: number;
   accompanyTitle: string;
   accompanyContent: string;
   openStatus: boolean;
-  createdAt: string | null;
-  modifiedAt: string | null;
+  coordX: number;
+  coordY: number;
+  createdAt: string;
+  modifiedAt: string;
 }
 
 export interface AccompanyDataType extends AccompanyCommonType {
-  memberId: number;
-  writerName: string;
+  memberId?: number;
+  writerName?: string;
+  registeredMembers: number;
 }
 
 export interface AccompanyDetailDataType extends AccompanyCommonType {

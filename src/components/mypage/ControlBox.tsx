@@ -1,5 +1,5 @@
 import React from 'react';
-import MyInfo from './myinfo/MyInfo';
+import MyInfo from '@components/mypage/myinfo/MyInfo';
 import { myPageTabType } from './SideBar';
 import MyBoard from './myboard/MyBoard';
 

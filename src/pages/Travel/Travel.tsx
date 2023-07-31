@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Footer from '@components/common/Footer';
 import Header from '@components/common/Header';
 import Container from '@components/common/Container';
-import Modal from '@pages/Login/Modal';
 import { useLocation } from 'react-router-dom';
 import RegionBtns from '@components/travel/main/RegionBtns';
 import TravelCardBox from '@components/travel/TravelCardBox';
@@ -14,7 +13,6 @@ import { objectToQuerystring, querystringToObject } from '@/utils/commonUtil';
 import useRouter from '@/hooks/useRouter';
 
 const Travel = () => {
-  const [openModal, setOpenModal] = useState(false);
   const [curPage, setCurPage] = useState<number>(1);
   const { goTo } = useRouter();
   const location = useLocation();
@@ -32,7 +30,7 @@ const Travel = () => {
   }, [location]);
   return (
     <>
-      <Header setOpenModal={setOpenModal} />
+      <Header />
       <Container>
         <RegionBtns />
         <PlaceTypeBtn />
@@ -48,7 +46,6 @@ const Travel = () => {
           </>
         )}
       </Container>
-      {openModal ? <Modal setOpenModal={setOpenModal} /> : ''}
       <Footer />
     </>
   );
