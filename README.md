@@ -7,7 +7,7 @@
 
 ## 🔗 배포 주소
 
-> 프론트 서버 : http://wanderhub.s3-website.ap-northeast-2.amazonaws.com  
+> 프론트 서버 : https://wanderhubtravel.netlify.app
 > 백엔드 서버 : http://ec2-3-34-80-242.ap-northeast-2.compute.amazonaws.com:8080/
 
 ## 🗺️ 팀 소개
