@@ -1,0 +1,5 @@
+[[redirects]]
+from = "/proxy/*"
+  to = "http://ec2-3-34-80-242.ap-northeast-2.compute.amazonaws.com:8080/:splat"  
+  status = 200
+  force = true

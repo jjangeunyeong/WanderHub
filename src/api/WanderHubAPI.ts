@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { PROXY } from './BASEURL';
 
 const instance = axios.create({
-  baseURL: '/v1',
+  baseURL: `${PROXY}/v1`,
   headers: {
     'Content-Type': 'application/json',
   },
