@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import WanderHubAPI from '@/api/WanderHubAPI';
 import { BoardType } from '@/types/boardType';
+import { useNavigate } from 'react-router-dom';
 
 interface PaginationProps {
   totalPages: number;
@@ -8,6 +9,7 @@ interface PaginationProps {
 }
 
 const Pagination = ({ totalPages, setBoardList }: PaginationProps) => {
+  const navigate = useNavigate();
   const [curPage, setCurPage] = useState(1);
   const [paginationFirstNum, setPaginationFirstNum] = useState(1);
 
@@ -57,6 +59,7 @@ const Pagination = ({ totalPages, setBoardList }: PaginationProps) => {
       setBoardList(res.data.data);
     }
     getCurpagePostlist();
+    navigate(`?page=${curPage}`);
   }, [curPage]);
 
   return (

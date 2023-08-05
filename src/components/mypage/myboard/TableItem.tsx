@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { BoardType } from '@/types/boardType';
 import { AccompanyDetailDataType } from '@/types/accompanyType';
+import { useNavigate } from 'react-router-dom';
 
 interface TableItemProps {
   curMenu: string;
@@ -10,6 +11,7 @@ interface TableItemProps {
 }
 const TableItem = ({ curMenu, communityBoard, accompanyBoard }: TableItemProps) => {
   const [isToggle, setIsToggle] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsToggle(!isToggle);
@@ -17,7 +19,14 @@ const TableItem = ({ curMenu, communityBoard, accompanyBoard }: TableItemProps) 
 
   return (
     <>
-      <tr>
+      <tr
+        className="cursor-pointer"
+        onClick={() => {
+          curMenu === 'myAccompany'
+            ? navigate(`/accompany/${accompanyBoard?.id}`)
+            : navigate(`/community/${communityBoard?.boardId}`);
+        }}
+      >
         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
           <p className="text-gray-900 whitespace-no-wrap">
             {curMenu === 'myAccompany' ? accompanyBoard?.accompanyLocal : communityBoard?.local}
