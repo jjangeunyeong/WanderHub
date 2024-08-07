@@ -5,11 +5,6 @@
 <p align='center'>
 <img src="https://github.com/WanderHub/WanderHub_Frontend/assets/123078739/75e40e8d-ee49-4c9b-978c-1fd21af0f6f8" width="300px" height="300px" alt="SiteLogo"></img></p><br/>
 
-## 🔗 배포 주소
-
-> 프론트 서버 : https://wanderhubtravel.netlify.app
-> 백엔드 서버 : http://ec2-3-34-80-242.ap-northeast-2.compute.amazonaws.com:8080/
-
 ## 🗺️ 팀 소개
 
 ### 🧳 팀원 소개
